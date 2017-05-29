@@ -72,6 +72,20 @@ func NewWriter(dst *xdr.Encoder,enc *noise.CipherState) *Writer {
 	return &Writer{dst:dst,enc:enc}
 }
 
+/*
+The Connection is a simple object acting as reader and writer, carrying the
+minimal information needed to perform the noise protocol handshake. After
+the call to the .Init() method, the connection can be written to, so that the
+data is being send during the handshake. However, this data is not encrypted
+using a private key, so no secrecy for this data is given.
+
+	c := new(seep.Connection)
+	c.Init()
+	c.Write(someData) // this data is sent during the handshake.
+	err := c.Handshake(src,dst,cfg)
+	// ... check error
+	// use c as Reader and Writer
+*/
 type Connection struct {
 	io.Writer
 	io.Reader
