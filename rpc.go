@@ -184,6 +184,9 @@ func xdrDecResp(b []byte,r *rpc.Response) (error,func(i interface{}) error) {
 	}
 }
 
+/*
+Creates a client side RPC codec, that uses XDR as format to encode structures.
+*/
 func NewRpcClient(src *xdr.Decoder, dst *xdr.Encoder,nc noise.Config,c io.Closer) (rpc.ClientCodec,error) {
 	if c==nil { c = rpcCloserInst }
 	r := new(rpcClientCodec)
@@ -194,6 +197,9 @@ func NewRpcClient(src *xdr.Decoder, dst *xdr.Encoder,nc noise.Config,c io.Closer
 	return r,err
 }
 
+/*
+Creates a client side RPC codec, that uses XDR as format to encode structures.
+*/
 func NewRpcSource(src *xdr.Decoder, dst *xdr.Encoder,nc noise.Config,c io.Closer) (rpc.ServerCodec,error) {
 	if c==nil { c = rpcCloserInst }
 	r := new(rpcServerCodec)
@@ -240,6 +246,9 @@ func gobDecResp(b []byte,r *rpc.Response) (error,func(i interface{}) error) {
 	}
 }
 
+/*
+Creates a client side RPC codec, that uses GOB as format to encode structures.
+*/
 func NewGobRpcClient(src *xdr.Decoder, dst *xdr.Encoder,nc noise.Config,c io.Closer) (rpc.ClientCodec,error) {
 	if c==nil { c = rpcCloserInst }
 	r := new(rpcClientCodec)
@@ -250,6 +259,9 @@ func NewGobRpcClient(src *xdr.Decoder, dst *xdr.Encoder,nc noise.Config,c io.Clo
 	return r,err
 }
 
+/*
+Creates a server side RPC codec, that uses GOB as format to encode structures.
+*/
 func NewGobRpcSource(src *xdr.Decoder, dst *xdr.Encoder,nc noise.Config,c io.Closer) (rpc.ServerCodec,error) {
 	if c==nil { c = rpcCloserInst }
 	r := new(rpcServerCodec)
